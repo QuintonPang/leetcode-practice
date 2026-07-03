@@ -10,6 +10,7 @@ class Solution {
         int left = 0;
         int right = nums.length -1;
 
+        
         while(left <= right){
 int[] range = partition(nums, left, right);            if (target >= range[0] && target <= range[1]) {
     return nums[target];
@@ -23,6 +24,7 @@ int[] range = partition(nums, left, right);            if (target >= range[0] &&
         return -1;
     }
 
+    // 3 way quickselect, group equal numbers together
     int[] partition(int[] nums, int left, int right) {
     int randomIndex = left + random.nextInt(right - left + 1);
     int pivot = nums[randomIndex];
@@ -35,12 +37,13 @@ int[] range = partition(nums, left, right);            if (target >= range[0] &&
         if (nums[i] < pivot) {
             swap(nums, less, i);
             less++;
-            i++;
+            i++; // we can increment i here because the new number has been checked (comes from left part)
         } else if (nums[i] > pivot) {
             swap(nums, i, greater);
+            // we don't need to increment i here because the new number hasn't been checked (comes from right part)
             greater--;
         } else {
-            i++;
+            i++; 
         }
     }
 
